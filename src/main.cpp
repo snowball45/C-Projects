@@ -1,19 +1,28 @@
 #include <iostream>
-#include <string>
 
-#include "BinarySearchTree.h"
+#include "PriorityQueue.h"
 
 int main() {
-    // Give us a random tree each time
-    srand(time(NULL));
-    // 15 elements in the tree
-    constexpr int TREE_SIZE = 15;
 
-    BinarySearchTree<std::string, int> simpleTree;
-    std::string names[TREE_SIZE] {"Teresa", "Carlos", "Nkemdi", "Dante", "Alexander", "Evelyn", "Dillon", "Thomas", "Armando", "Mariel", "Furkan", "Anjali", "Jeremy", "Clayton", "Jessica"};
-    for (int i = 0; i < TREE_SIZE; ++i) {
-        simpleTree.insert( { names[i], rand() % TREE_SIZE } );
+    PriorityQueue<int> max_pq;
+    PriorityQueue<int, std::vector<int>, std::greater<int>> min_pq;
+
+    for (int i = 0; i < 10; ++i) {
+        max_pq.push(i % 2 ? -i : i);
+        min_pq.push(i % 2 ? -i : i);
     }
 
-    printTree(simpleTree);
+    std::cout << "Max Priority Queue:" << std::endl;
+    while (!max_pq.empty()) {
+        std::cout << max_pq.top() << ' ';
+        max_pq.pop();
+    }
+    std::cout << "is sorted descending?" << std::endl;
+
+    std::cout << "Min Priority Queue:" << std::endl;
+    while (!min_pq.empty()) {
+        std::cout << min_pq.top() << ' ';
+        min_pq.pop();
+    }
+    std::cout << "is sorted ascending?" << std::endl;
 }
